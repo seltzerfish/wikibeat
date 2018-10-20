@@ -2,6 +2,7 @@ MAX_LINE_LENGTH = 110
 USE_MORE_MAX = 40
 NUM_PERFECT = 500
 NUM_IMPERFECT = 500
+THREAD_WAIT = 0.03
 from time import sleep
 from datamuse import datamuse
 from nltk.tokenize import sent_tokenize, word_tokenize
@@ -52,6 +53,24 @@ def thread_perf(word1, x, ending_words, output, seen, api, used, max=NUM_PERFECT
                 )
                 print((rhymes_here[j][0], rhymes_here[k][0]))
 
+def thread_almost(word1, x, ending_words, output, seen2, api, used, max=NUM_IMPERFECT):
+    if word1 in seen2:
+        print("SAVED")
+        return
+    almost = api.words(rel_nry=word1, max=NUM_IMPERFECT)
+    # rhymes_here = []
+
+    for entry in almost:
+        w = entry["word"]
+        for y, e in enumerate(ending_words[x:]):
+            if w == e:
+                # rhymes_here.append((w, y + x))
+                if (word1, w) not in used and (w, word1) not in used:
+                    print(word1, w, entry["score"])
+                    used.add((word1, w))
+                    output.append((word1, w, x, y + x))
+                    seen2.add(word1)
+                    seen2.add(w)
 
 def rap(sentences):
     used = set()
@@ -67,7 +86,7 @@ def rap(sentences):
     for x, word1 in enumerate(ending_words):
         threads[x] = Thread(target=thread_perf, args=(word1, x, ending_words, results[x], seen, api, used))
         threads[x].start()
-        sleep(0.1)
+        sleep(THREAD_WAIT)
     
     for i in range(len(threads)):
         threads[i].join()
@@ -80,24 +99,20 @@ def rap(sentences):
     seen2 = set()
     if len(rhymes) < USE_MORE_MAX:
         print("USING MORE")
+        threads2 = [None] * len(ending_words)
+        results2 = [[] for _ in range(len(ending_words))]
         for x, word1 in enumerate(ending_words):
-            if word1 in seen2:
-                print("SAVED")
-                continue
-            almost = api.words(rel_nry=word1, max=NUM_IMPERFECT)
-            # rhymes_here = []
+            threads2[x] = Thread(target=thread_almost, args=(word1, x, ending_words, results2[x], seen2, api, used))
+            threads2[x].start()
+            sleep(THREAD_WAIT)
+    
+        for i in range(len(threads2)):
+            threads2[i].join()
+        for r in results2:
+            if r:
+                for e in r:
+                    rhymes.append(e)
 
-            for entry in almost:
-                w = entry["word"]
-                for y, e in enumerate(ending_words[x:]):
-                    if w == e:
-                        # rhymes_here.append((w, y + x))
-                        if (word1, w) not in used and (w, word1) not in used:
-                            print(word1, w, entry["score"])
-                            used.add((word1, w))
-                            rhymes.append((word1, w, x, y + x))
-                            seen2.add(word1)
-                            seen2.add(w)
             # for j in range(len(rhymes_here)):
             #     for k in range(j + 1, len(rhymes_here)):
             #         if (
