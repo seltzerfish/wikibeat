@@ -7,11 +7,14 @@ from nltk.tokenize import sent_tokenize
 from translate_back import translate_back
 from threading import Thread
 from time import sleep
+
 # with open("out.txt", 'r') as f:
 #     page = " ".join(f.readlines())
 
 
-page = fetch_page_content("https://en.wikipedia.org/wiki/William_Williams_(Commissioner_of_Ellis_Island)")
+page = fetch_page_content(
+    "https://en.wikipedia.org/wiki/William_Williams_(Commissioner_of_Ellis_Island)"
+)
 sentences = [clean_article(sent).strip() for sent in sent_tokenize(page)]
 
 couplets = rap(sentences)

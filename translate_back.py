@@ -1,13 +1,14 @@
 from googletrans import Translator
 
+
 def translate_back(inp, number, output):
     t = Translator()
-    a = t.translate(inp, src='en', dest='ja')
-    b = t.translate(a.text, src='ja', dest='en').text
+    a = t.translate(inp, src="en", dest="ja")
+    b = t.translate(a.text, src="ja", dest="en").text
     output.append(number)
     output.append(b)
     print(number)
-    
+
 
 # threads = [None] * len(sentences)
 # results = [[] for _ in range(len(sentences))]

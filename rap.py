@@ -6,6 +6,7 @@ NUM_IMPERFECT = 500
 from datamuse import datamuse
 from nltk.tokenize import sent_tokenize, word_tokenize
 
+
 def get_end_words(sentences):
     ending_words = []
     for s in sentences:
@@ -40,7 +41,7 @@ def rap(sentences):
                 if w == e:
                     rhymes_here.append((w, y + x))
                     if (word1, w) not in used and (w, word1) not in used:
-                        print(word1, w, entry['score'])
+                        print(word1, w, entry["score"])
                         used.add((word1, w))
                         rhymes.append((word1, w, x, y + x))
                         seen.add(word1)
@@ -77,7 +78,7 @@ def rap(sentences):
                     if w == e:
                         # rhymes_here.append((w, y + x))
                         if (word1, w) not in used and (w, word1) not in used:
-                            print(word1, w, entry['score'])
+                            print(word1, w, entry["score"])
                             used.add((word1, w))
                             rhymes.append((word1, w, x, y + x))
                             seen2.add(word1)

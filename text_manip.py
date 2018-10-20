@@ -10,7 +10,7 @@ def clean_article(article):
     article = re.sub(r"\[\d+\]", "", article)
     article = re.sub(r"\[\w+\]", "", article)
     article = re.sub(r":\d+\s", "", article)
-    article = article.replace("\"", "")
+    article = article.replace('"', "")
 
     return article
 
