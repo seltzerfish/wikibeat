@@ -13,7 +13,7 @@ from time import sleep
 
 
 page = fetch_page_content(
-    "https://en.wikipedia.org/wiki/William_Williams_(Commissioner_of_Ellis_Island)"
+    "https://en.wikipedia.org/wiki/Bob_Ross"
 )
 sentences = [clean_article(sent).strip() for sent in sent_tokenize(page)]
 
