@@ -14,7 +14,7 @@ from audio_manip import *
 
 
 def record_rap(wiki_page):
-    ADLIBS = ["yo!", "ayy!", "yah!", "okay!", "grah!", "bop!"]
+    ADLIBS = ["yo", "ayy", "yah", "okay", "grah"]
     title, page = fetch_page_content(wiki_page)
     title = clean_article(title)
     sentences = [clean_article(sent).strip() for sent in sent_tokenize(page)]
@@ -67,9 +67,10 @@ def record_rap(wiki_page):
                     valid = False
                     break
             if valid:
-                save_wav(choice(ADLIBS), "audio/a" + str(i))
+                # save_wav(choice(ADLIBS), "audio/a" + str(i))
                 print("ad")
-                lib = AudioSegment.from_file("audio/a" + str(i) + ".wav")
+
+                lib = AudioSegment.from_file("audio/" + choice(ADLIBS) + ".wav")
                 song = song.overlay(lib, position=a)
 
         save_wav(title, "audio/title")
@@ -83,6 +84,6 @@ def record_rap(wiki_page):
             print(couplet[0])
             print(couplet[1])
             print()
-        return couplets
+        return (title, full_ranges, couplets)
     else:
         return None

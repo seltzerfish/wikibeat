@@ -51,7 +51,8 @@ def accept_input():
         r = record_rap(page.url)
         if not r:
             redirect("/sorry")
-        return "done"
+        redirect("/perform/" + str(r))
+        
 
     else:
         return template("index", sess=get_session())
@@ -70,8 +71,20 @@ def chosen(choice):
     r = record_rap(page.url)
     if not r:
         redirect("/sorry")
-    return "done"
+    redirect("/perform/" + str(r))
 
+
+@route("/perform/<data>")
+def perform(data):
+    data = eval(data)
+    print([list(i) for i in data[1]])
+    collect = []
+    for e in data[2]:
+        for sub_e in e:
+            collect.append(sub_e)
+    print(collect)
+
+    return template("perform", title=data[0], timings=[list(i) for i in data[1]], couplets=collect)
 
 @route("/sorry")
 def sorry():
@@ -82,6 +95,9 @@ def sorry():
 def send_static(file):
     return static_file(file, root="static/")
 
+@route("/productions/<file:path>")
+def send_productions(file):
+    return static_file(file, root="productions/")
 
 if __name__ == "__main__":
     bottle.run(app=app, host="localhost", port=8080, reloader=True, debug=True)

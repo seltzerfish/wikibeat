@@ -147,7 +147,7 @@ def rap(sentences):
     couplets = []
 
     for r in rhymes:
-        couplets.append((sentences[r[2]], sentences[r[3]]))
+        couplets.append((sentences[r[2]].replace(u'\xa0', u' '), sentences[r[3]].replace(u'\xa0', u' ')))
 
     # couplets.sort(key=lambda x: abs(len(x[0]) - len(x[1])))
     # couplets.sort(key=lambda x: len(x[0]))

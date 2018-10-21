@@ -4,7 +4,7 @@
   <div class="row">
     <div class="twelve column" style="margin-top: 10%">
       <h4 style="text-align: center; color: white; font-size: 70px">WikiBeat v1.0</h4>
-      <h5 style="text-align: center; color: white; font-size: 20px">What's good, fam? Introducing hackathon's only bot that writes educational raps about any topic</h5>
+      <h5 style="text-align: center; color: white; font-size: 20px">What's good, fam? Introducing HackGT's only bot that writes educational raps about any topic</h5>
     </div>
   </div>
   
@@ -17,7 +17,7 @@
         </div>
       </div>
       
-      <input class="button-primary" type="submit" style="margin-top: 2%; color:white; background-color:black; border-color:white" value="Submit" onclick="loading();">
+      <input class="button-primary" type="submit" style="margin-top: 2%; color:white; background-color:black; border-color:white" value="🔥 Leggo 🔥" onclick="loading();">
     </form>
     
   </div>
