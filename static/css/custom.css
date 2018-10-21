@@ -1,0 +1,113 @@
+.subheader {
+    margin-left: 20%; 
+    margin-right: 20%;
+    
+  }
+.custom-img {
+  border-radius: 20px
+}
+  .custom-btn {
+    margin-top: 5%; 
+    font-weight: 400; 
+    color: white;
+  
+    border-radius: 10px;
+    border: 1px solid white;
+    /* background-color: #726064;
+    color: white; */
+  }
+  
+  .custom-btn:hover {
+    background-color: rgb(82, 120, 208);
+  }
+  .slider .indicators .indicator-item.active {
+    background-color: #00bdd2;
+  }
+  #grad1 {
+    height: 100%;
+    background: #726064; /* For browsers that do not support gradients */
+    background: linear-gradient(#000000, rgb(143, 8, 8)); /* Standard syntax (must be last) */
+    position: absolute;
+    width: 100%;
+    z-index: -2;
+  }
+  #grad2 {
+    height: 120vh;
+    background: #524044; /* For browsers that do not support gradients */
+    background: linear-gradient(#32426D, #060C2B); /* Standard syntax (must be last) */
+    
+  
+  }
+  #medal {
+    position: absolute;
+    margin-top: -20px;
+    margin-left: 30px;
+    align-content: center;
+  }
+  
+  #medaltext {
+    position: absolute;
+    margin-left: 15px;
+    margin-right: -10px;
+    color: white;
+    font-size: 13px;
+  }
+  
+  
+  #see_more {
+    /* width: 300px; */
+    position: absolute;
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
+    top: 87%;
+    width: 100px;
+    
+  }
+  
+  body {
+    background-color: #000000;
+  }
+  #particles-js canvas{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+  #mobile_bio {
+    display: none;
+  }
+  
+  @media screen and (max-width: 600px) {
+    #bio {
+      visibility: hidden;
+      clear: both;
+      float: left;
+      margin: 10px auto 5px 20px;
+      width: 28%;
+      display: none;
+    }
+    .subheader {
+      display: none;
+    }
+    #medal {
+      visibility: hidden;
+      clear: both;
+      float: left;
+      margin: 10px auto 5px 20px;
+      width: 28%;
+      display: none;
+    }
+    #logo {
+      visibility: hidden;
+      clear: both;
+      float: left;
+      margin: 10px auto 5px 20px;
+      width: 28%;
+      display: none;
+    }
+    #mobile_bio {
+      display: block;
+    }
+  }

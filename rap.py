@@ -1,5 +1,5 @@
-MAX_LINE_LENGTH = 110
-USE_MORE_MAX = 40
+MAX_LINE_LENGTH = 105
+USE_MORE_MAX = 50
 NUM_PERFECT = 500
 NUM_IMPERFECT = 500
 THREAD_WAIT = 0.03
@@ -7,6 +7,7 @@ from time import sleep
 from datamuse import datamuse
 from nltk.tokenize import sent_tokenize, word_tokenize
 from threading import Thread
+
 
 def get_end_words(sentences):
     ending_words = []
@@ -19,6 +20,7 @@ def get_end_words(sentences):
         else:
             ending_words.append(a)
     return ending_words
+
 
 def thread_perf(word1, x, ending_words, output, seen, api, used, max=NUM_PERFECT):
     if word1 in seen:
@@ -39,9 +41,9 @@ def thread_perf(word1, x, ending_words, output, seen, api, used, max=NUM_PERFECT
                     seen.add(w)
     for j in range(len(rhymes_here)):
         for k in range(j + 1, len(rhymes_here)):
-            if (rhymes_here[j][0], rhymes_here[k][0]) not in used and rhymes_here[
-                j
-            ][0] != rhymes_here[k][0]:
+            if (rhymes_here[j][0], rhymes_here[k][0]) not in used and rhymes_here[j][
+                0
+            ] != rhymes_here[k][0]:
                 used.add((rhymes_here[j][0], rhymes_here[k][0]))
                 output.append(
                     (
@@ -52,6 +54,7 @@ def thread_perf(word1, x, ending_words, output, seen, api, used, max=NUM_PERFECT
                     )
                 )
                 print((rhymes_here[j][0], rhymes_here[k][0]))
+
 
 def thread_almost(word1, x, ending_words, output, seen2, api, used, max=NUM_IMPERFECT):
     if word1 in seen2:
@@ -72,6 +75,7 @@ def thread_almost(word1, x, ending_words, output, seen2, api, used, max=NUM_IMPE
                     seen2.add(word1)
                     seen2.add(w)
 
+
 def rap(sentences):
     used = set()
     rhymes = []
@@ -84,10 +88,13 @@ def rap(sentences):
     threads = [None] * len(ending_words)
     results = [[] for _ in range(len(ending_words))]
     for x, word1 in enumerate(ending_words):
-        threads[x] = Thread(target=thread_perf, args=(word1, x, ending_words, results[x], seen, api, used))
+        threads[x] = Thread(
+            target=thread_perf,
+            args=(word1, x, ending_words, results[x], seen, api, used),
+        )
         threads[x].start()
         sleep(THREAD_WAIT)
-    
+
     for i in range(len(threads)):
         threads[i].join()
     for r in results:
@@ -102,10 +109,13 @@ def rap(sentences):
         threads2 = [None] * len(ending_words)
         results2 = [[] for _ in range(len(ending_words))]
         for x, word1 in enumerate(ending_words):
-            threads2[x] = Thread(target=thread_almost, args=(word1, x, ending_words, results2[x], seen2, api, used))
+            threads2[x] = Thread(
+                target=thread_almost,
+                args=(word1, x, ending_words, results2[x], seen2, api, used),
+            )
             threads2[x].start()
             sleep(THREAD_WAIT)
-    
+
         for i in range(len(threads2)):
             threads2[i].join()
         for r in results2:

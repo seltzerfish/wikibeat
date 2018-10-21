@@ -6,3 +6,5 @@ lxml
 nltk
 python-datamuse
 googletrans
+bottle
+wikipedia

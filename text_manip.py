@@ -10,6 +10,8 @@ def clean_article(article):
     article = re.sub(r"\[.+\]", "", article)
     article = re.sub(r":\d+\s", "", article)
     article = article.replace('"', "")
+    article = re.sub(r"\<\w+\>", "", article)
+    article = re.sub(r"\<\/\w+\>", "", article)
 
     return article
 
@@ -20,6 +22,7 @@ def count_syllables(string):
 
 # 0 - 8 = short
 # 8 - 16 = med
+
 
 def delete_duplicates(couplets):
     for i, c1 in enumerate(couplets):
