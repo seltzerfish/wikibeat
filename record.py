@@ -27,7 +27,7 @@ def record_rap(wiki_page):
     if title.lower() == "cat":
         del couplets[1]
     p = profiles.beat2
-    song = AudioSegment.from_wav("audio/beat2.wav") - 4
+    song = AudioSegment.from_file("audio/beat2.mp3") - 4
     full_ranges = []
     couplet_counter = 0
     for c_range in p["couplet"]:
