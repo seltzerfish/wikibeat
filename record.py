@@ -53,8 +53,8 @@ def record_rap(wiki_page):
         c1_a = AudioSegment.from_file("audio/c1.wav")
         c2_a = AudioSegment.from_file("audio/c2.wav")
         song = song.overlay(c1_a, position=c_range[0][1] - l1)
-        full_ranges.append((c_range[0][1] - l1, c_range[0][1]))
-        full_ranges.append((c_range[1][1] - l2, c_range[1][1]))
+        full_ranges.append([c_range[0][1] - l1, c_range[0][1]])
+        full_ranges.append([c_range[1][1] - l2, c_range[1][1]])
         song = song.overlay(c2_a, position=c_range[1][1] - l2)
     print(full_ranges)
     if full_ranges:
@@ -84,6 +84,11 @@ def record_rap(wiki_page):
             print(couplet[0])
             print(couplet[1])
             print()
-        return (title, full_ranges, couplets)
+        for i in range(1, len(full_ranges)):
+            cur = full_ranges[i]
+            prev = full_ranges[i - 1]
+            if cur[0] < prev[1]:
+                full_ranges[i][0] = prev[1] + 1
+        return (title, full_ranges, couplets[:len(full_ranges) // 2])
     else:
         return None

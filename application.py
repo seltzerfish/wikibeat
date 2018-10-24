@@ -47,11 +47,16 @@ def accept_input():
             page = wikipedia.page(inp)
         except Exception:
             options = wikipedia.search(inp)[:5]
-            redirect("/choose/" + str(options))
+            if options:
+                redirect("/choose/" + str(options[1:]))
+            else:
+                redirect("/sorry")
         r = record_rap(page.url)
         if not r:
             redirect("/sorry")
-        redirect("/perform/" + str(r))
+        print("ok")
+        print(r)
+        redirect("/perform/" + str(r).encode('ascii','ignore').decode('ascii'))
         
 
     else:
@@ -83,7 +88,6 @@ def perform(data):
         for sub_e in e:
             collect.append(sub_e)
     print(collect)
-
     return template("perform", title=data[0], timings=[list(i) for i in data[1]], couplets=collect)
 
 @route("/sorry")

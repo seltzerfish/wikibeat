@@ -3,8 +3,8 @@
 <div class="container" id="content">
   <div class="row">
     <div class="twelve column" style="margin-top: 10%">
-      <h4 style="text-align: center; color: white; font-size: 70px">WikiBeat v1.0</h4>
-      <h5 style="text-align: center; color: white; font-size: 20px">What's good, fam? Introducing HackGT's only bot that writes educational raps about any topic</h5>
+      <h4 style="text-align: center; color: white; font-size: 70px">🔥 WikiBeat v1.1 🔥</h4>
+      <h5 style="text-align: center; color: white; font-size: 20px">What's good, fam? Introducing HackGT's only bot that writes factual raps about any topic</h5>
     </div>
   </div>
   

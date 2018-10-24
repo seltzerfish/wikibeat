@@ -123,22 +123,6 @@ def rap(sentences):
                 for e in r:
                     rhymes.append(e)
 
-            # for j in range(len(rhymes_here)):
-            #     for k in range(j + 1, len(rhymes_here)):
-            #         if (
-            #             rhymes_here[j][0],
-            #             rhymes_here[k][0],
-            #         ) not in used and rhymes_here[j][0] != rhymes_here[k][0]:
-            #             used.add((rhymes_here[j][0], rhymes_here[k][0]))
-            #             rhymes.append(
-            #                 (
-            #                     rhymes_here[j][0],
-            #                     rhymes_here[k][0],
-            #                     rhymes_here[j][1],
-            #                     rhymes_here[k][1],
-            #                 )
-            #             )
-            #             print((rhymes_here[j][0], rhymes_here[k][0]))
     print(rhymes)
 
     rhymes.sort(key=lambda x: abs(x[2] - x[3]))

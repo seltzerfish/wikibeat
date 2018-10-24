@@ -14,11 +14,12 @@
     <h4 id="line1" style="margin-top: 4%; text-align: center; color: white; font-size: 30px; display: none"></h4>
     <h4 id="line2" style="margin-top: 4%; text-align: center; color: white; font-size: 30px; display: none"></h4>
 </div>
-
-<button id="again" class="button button-primary" onclick="play_song();" style="display: none; margin-left:auto; margin-top:20%; margin-right:auto; width:50%; background-color: black; border-color: white; height:50px; font-size: 20px">🔥
+<button id="again" class="button button-primary" onclick="play_song();" style="display: none; margin-left:auto; margin-top:10%; margin-right:auto; width:50%; background-color: black; border-color: white; height:50px; font-size: 20px">🔥
     Damn, son. Play dat again 🔥</button>
-<a id="leave" href="/" class="button button-primary" onclick="play_song();" style="display: none; margin-left:auto; margin-top:2%; margin-right:auto; width:50%; background-color: black; border-color: white; height:50px; font-size: 20px">Take
-    me back to da home page</a>
+    <a id="download" download="{{title}}.mp3" href='../productions/{{title}}.mp3' class="button button-primary" style="display: none; margin-top:2%; margin-left:auto; margin-right:auto; width:50%; background-color: black; border-color: white; height:50px; font-size: 20px">🥁 Download rap as .mp3 🥁</a>
+
+<a id="leave" href="/" class="button button-primary" style="display: none; margin-left:auto; margin-top:2%; margin-right:auto; width:50%; background-color: black; border-color: white; height:50px; font-size: 20px">🏃 Take
+    me back to da home page 🏃</a>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 <script>
     function play_song() {
@@ -31,6 +32,8 @@
     e.style.display = "none";
     ag = document.getElementById("again");
     ag.style.display = "none";
+    dl = document.getElementById("download");
+    dl.style.display = "none";
     le = document.getElementById("leave");
     le.style.display = "none";
     e1 = document.getElementById("line1");
@@ -57,16 +60,18 @@
     for (i = 0; i < positions.length; i += 1) {
 
         if (i % 2 == 0) {
-            setTimeout(setLine1.bind(null, coup[i]), positions[i][0] - interval)
+            setTimeout(setLine1.bind(null, allExceptLast(coup[i]) + " <span style='color: #e5f441; text-decoration: underline'>" + lastWord(coup[i]) + "</span>"), positions[i][0] - interval)
         }
 
         else {
-            setTimeout(setLine2.bind(null, coup[i]), positions[i][0] - interval)
+            setTimeout(setLine2.bind(null, allExceptLast(coup[i]) + " <span style='color: #e5f441; text-decoration: underline'>" + lastWord(coup[i]) + "</span>"), positions[i][0] - interval)
             setTimeout(setLine1.bind(null, ""), positions[i][1] - interval)
             setTimeout(setLine2.bind(null, ""), positions[i][1] - interval)
             if (i == positions.length - 1) {
                 setTimeout(make_visible.bind(null, "again"), positions[i][1] - interval + 2000)
                 setTimeout(make_visible.bind(null, "leave"), positions[i][1] - interval + 2000)
+                setTimeout(make_visible.bind(null, "download"), positions[i][1] - interval + 2000)
+
 
             }
         }
@@ -84,6 +89,14 @@
     function setLine2(content) {
         e = document.getElementById("line2");
         e.innerHTML = content;
+    }
+    function lastWord(words) {
+        var n = words.split(" ");
+        return n[n.length - 1];
+    }
+    function allExceptLast(words) {
+        var n = words.split(" ");
+        return n.slice(0, n.length - 1).join(" ");
     }
     $(document).ready(function () {
         $(".fancy_title").lettering();
