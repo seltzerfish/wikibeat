@@ -27,7 +27,6 @@ app = SessionMiddleware(bottle.app(), session_opts)
 def get_session():
     return bottle.request.environ.get("beaker.session")
 
-
 ###############################################################################
 # Routes ######################################################################
 ###############################################################################
@@ -35,12 +34,12 @@ def get_session():
 
 @route("/", name="index")
 def index():
-    s = bottle.request.environ.get("beaker.session")
     return template("index", sess=get_session())
 
 
 @route("/submit_topic", method="POST")
 def accept_input():
+    s = get_session()
     if request.method == "POST":
         inp = request.forms.get("inp")
         try:
