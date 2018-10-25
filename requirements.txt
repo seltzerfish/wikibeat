@@ -8,3 +8,5 @@ python-datamuse
 googletrans
 bottle
 wikipedia
+beaker
+pyphen
