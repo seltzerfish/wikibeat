@@ -55,7 +55,7 @@ def accept_input():
             redirect("/sorry")
         print("ok")
         print(r)
-        redirect("/perform/" + str(r).encode('ascii','ignore').decode('ascii').replace('?', ''))
+        redirect("/perform/" + str(r).encode('ascii','ignore').decode('ascii').replace('?', '').replace('/', ''))
         
 
     else:
